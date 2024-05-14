@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualização Multi-Tenancy</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Visualização Multi-Tenancy</h1>
+    <label for="tenantName">Nome do Inquilino:</label><br>
+    <input type="text" id="tenantName" name="tenantName"><br>
+    <button id="loadTasks">Carregar Tarefas</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        $(document).ready(function() {
+            $('#loadTasks').click(function() {
+                var tenantName = $('#tenantName').val();
+                $.ajax({
+                    url: 'http://localhost:3000/tasks',
+                    headers: {
+                        'x-tenant-name': tenantName
+                    },
+                    success: function(data) {
+                        $('#taskList').empty();
+                        data.forEach(function(task) {
+                            $('#taskList').append('<li>' + task.name + '</li>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
