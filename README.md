@@ -1,20 +1,35 @@
-# Sistema Multi-Tenancy
+# Multi Tenancy com Flask e PostgreSQL
 
-Este é um exemplo simples de um sistema multi-tenant usando Node.js e MongoDB.
+## Objetivo
 
-## Estratégia de Multi-Tenancy
+O objetivo deste projeto é demonstrar uma implementação básica de Multi Tenancy usando o framework Flask em Python e o banco de dados PostgreSQL. A estratégia de Multi Tenancy escolhida para este projeto é a **Shared Database, Shared Schema**.
 
-A estratégia de multi-tenancy usada é a "Banco de Dados Separado". Cada inquilino tem seu próprio banco de dados MongoDB. O nome do inquilino é passado através do cabeçalho HTTP `x-tenant-name`. Com base nesse cabeçalho, uma conexão com o banco de dados correspondente é estabelecida e o modelo `Task` é criado para esse inquilino.
+## Estratégia de Multi Tenancy
 
-## Como usar
+Na estratégia de **Shared Database, Shared Schema**, todos os clientes (tenants) compartilham o mesmo banco de dados e o mesmo esquema. Os dados dos clientes são diferenciados por uma coluna de identificação do inquilino em cada tabela. Isso permite que vários clientes usem a mesma instância da aplicação e do banco de dados, com seus dados devidamente isolados.
 
-1. Clone este repositório para sua máquina local.
-2. Instale as dependências com `npm install`.
-3. Inicie o servidor com `node server.js`.
-4. Abra o arquivo `index.html` em seu navegador.
-5. Insira o nome do inquilino e clique em "Carregar Tarefas" para ver as tarefas para esse inquilino.
+## Aplicação Desenvolvida
 
-## API REST
+A aplicação desenvolvida neste projeto é uma aplicação web simples usando o framework Flask. A aplicação permite aos usuários:
 
-O servidor fornece uma API REST simples que retorna tarefas para um inquilino específico. A rota é `GET /tasks` e o nome do inquilino deve ser passado no cabeçalho `x-tenant-name`.
+- Visualizar uma lista de usuários cadastrados.
+- Adicionar novos usuários.
 
+Os dados dos usuários são armazenados em uma tabela chamada `usuarios` dentro do banco de dados PostgreSQL. Cada usuário possui uma coluna `tenant_id` para identificar a que cliente ele pertence.
+
+## Configuração
+
+Para executar a aplicação, siga estas etapas:
+
+1. Instale o Python e o PostgreSQL, se ainda não estiverem instalados.
+2. Crie um ambiente virtual Python e instale as dependências:
+
+`pip install Flask psycopg2`
+
+3. Execute o script SQL fornecido (`script.sql`) para criar o banco de dados e a tabela necessários.
+4. Execute o arquivo Python (`app.py`) para iniciar o servidor Flask.
+5. Acesse a aplicação em seu navegador web através do URL `http://localhost:5000`.
+
+## Contribuição
+
+Se você quiser contribuir com melhorias para esta aplicação, sinta-se à vontade para enviar um pull request!
