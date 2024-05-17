@@ -7,7 +7,7 @@ app = Flask(__name__)
 def conectar_banco():
     try:
         conn = psycopg2.connect(
-            dbname="tentat",
+            dbname="nome_db",
             user="postgres",
             password="*******",
             host="localhost",
