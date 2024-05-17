@@ -30,6 +30,3 @@ Para executar a aplicação, siga estas etapas:
 4. Execute o arquivo Python (`app.py`) para iniciar o servidor Flask.
 5. Acesse a aplicação em seu navegador web através do URL `http://localhost:5000`.
 
-## Contribuição
-
-Se você quiser contribuir com melhorias para esta aplicação, sinta-se à vontade para enviar um pull request!
